@@ -58,3 +58,17 @@ def create_glucose_bmi_scatter(df):
     plt.close()
     
     return df[['Glucose', 'BMI']].corr()
+
+def create_correlation_heatmap(df):
+    """
+    Create a heatmap showing correlations between all features
+    """
+    plt.figure(figsize=(12, 8))
+    correlation_matrix = df.corr()
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f')
+    plt.title('Correlation Heatmap of Diabetes Features')
+    plt.tight_layout()
+    plt.savefig('correlation_heatmap.png')
+    plt.close()
+    
+    return correlation_matrix
