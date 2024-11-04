@@ -26,3 +26,19 @@ def load_and_clean_data():
         df[column] = df[column].fillna(df[column].median())
     
     return df
+
+def create_age_distribution_plot(df):
+    """
+    Create a histogram showing age distribution with diabetes status
+    """
+    plt.figure(figsize=(10, 6))
+    sns.histplot(data=df, x='Age', hue='Outcome', bins=30, multiple="layer", alpha=0.6)
+    plt.title('Age Distribution by Diabetes Status')
+    plt.xlabel('Age')
+    plt.ylabel('Count')
+    plt.legend(labels=['No Diabetes', 'Diabetes'])
+    plt.tight_layout()
+    plt.savefig('age_distribution.png')
+    plt.close()
+    
+    return df['Age'].describe()
