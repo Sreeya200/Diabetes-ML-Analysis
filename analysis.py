@@ -89,3 +89,15 @@ def train_and_evaluate_model(df):
     conf_matrix = confusion_matrix(y_test, y_pred)
     
     return conf_matrix, classification_report(y_test, y_pred)
+
+def generate_statistics(df):
+    """
+    Generate descriptive statistics for the dataset
+    """
+    return {
+        'basic_stats': df.describe(),
+        'correlations': df.corr(),
+        'diabetes_ratio': df['Outcome'].value_counts(normalize=True),
+        'feature_importance': df.drop('Outcome', axis=1).corrwith(df['Outcome']).sort_values(ascending=False)
+    }
+
