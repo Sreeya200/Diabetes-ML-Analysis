@@ -42,3 +42,19 @@ def create_age_distribution_plot(df):
     plt.close()
     
     return df['Age'].describe()
+
+def create_glucose_bmi_scatter(df):
+    """
+    Create a scatter plot of Glucose vs BMI with diabetes outcome color coding
+    """
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=df, x='Glucose', y='BMI', hue='Outcome', alpha=0.6)
+    plt.title('Glucose vs BMI by Diabetes Status')
+    plt.xlabel('Glucose Level')
+    plt.ylabel('BMI')
+    plt.legend(labels=['No Diabetes', 'Diabetes'])
+    plt.tight_layout()
+    plt.savefig('glucose_bmi_scatter.png')
+    plt.close()
+    
+    return df[['Glucose', 'BMI']].corr()
