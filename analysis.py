@@ -101,3 +101,30 @@ def generate_statistics(df):
         'feature_importance': df.drop('Outcome', axis=1).corrwith(df['Outcome']).sort_values(ascending=False)
     }
 
+def main():
+    # Load and clean data
+    df = load_and_clean_data()
+    
+    # Generate plots
+    age_stats = create_age_distribution_plot(df)
+    glucose_bmi_corr = create_glucose_bmi_scatter(df)
+    correlation_matrix = create_correlation_heatmap(df)
+    
+    # Generate statistics and model evaluation
+    stats = generate_statistics(df)
+    conf_matrix, class_report = train_and_evaluate_model(df)
+
+    # Print some text output for the analysis
+    print("Descriptive Statistics:\n", stats['basic_stats'])
+    print("\nCorrelation Matrix:\n", stats['correlations'])
+    print("\nDiabetes Ratio:\n", stats['diabetes_ratio'])
+    print("\nFeature Importance:\n", stats['feature_importance'])
+    print("\nConfusion Matrix:\n", conf_matrix)
+    print("\nClassification Report:\n", class_report)
+    print("\nAge Statistics:\n", age_stats)
+    print("\nGlucose vs BMI Correlation:\n", glucose_bmi_corr)
+    
+    return df, stats, conf_matrix, class_report
+
+if __name__ == "__main__":
+    df, stats, conf_matrix, class_report = main()
